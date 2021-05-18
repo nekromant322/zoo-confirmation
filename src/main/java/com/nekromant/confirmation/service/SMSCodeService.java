@@ -36,6 +36,12 @@ public class SMSCodeService {
         //sendSms(code, phoneNumber);
     }
 
+    /**
+     * Проверка кода из смс {@link SMSCode}
+     *
+     * @param code        - код из смс {@link SMSCode}
+     * @param phoneNumber - номер телефона пользователя {@link SMSCode}
+     */
     public void verifyCode(Integer code, String phoneNumber) {
         if (code == null || phoneNumber == null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Некорректные входные данные!");
