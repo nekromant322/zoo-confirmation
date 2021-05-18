@@ -6,7 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
 @PropertySource({
-        "classpath:config/application-dev.yml"
+        "classpath:application-dev.yml"
 })
 public class ZooConfirmationApplication {
     public static void main(String[] args) {

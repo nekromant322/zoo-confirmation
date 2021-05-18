@@ -1,0 +1,42 @@
+server:
+  port: 6060
+  address: localhost
+
+app:
+  const:
+    tokenExpiredDelayInDays: 3
+    tokensRemoveSchedulerDelay: 10800
+    smsCodeExpiredDelayInSeconds: 10
+    smsCodeRemoveSchedulerDelay: 1000000
+
+spring:
+  h2:
+    console:
+      enabled: false
+  datasource:
+    password: ${PROD_POSTGRE_PASSWORD}
+    username: ${PROD_POSTGRE_USERNAME}
+    url: ${PROD_POSTGRE_URL}
+    datasource:
+      driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL81Dialect
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
+
+logging:
+  file:
+    name: logs/app.log
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level:
+    org.springframework.web: ERROR
+    com.nekromant.zoo: INFO
+    org.hibernate: ERROR
