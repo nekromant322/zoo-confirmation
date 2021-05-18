@@ -28,8 +28,12 @@ public class SMSCodeService {
      * @param phoneNumber - номер телефона, на который будет отправлен код {@link SMSCode}
      */
     public void createCode(String phoneNumber) {
-        if (phoneNumber == null)
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Некорректные входные данные!");
+        try {
+            if (phoneNumber.isEmpty())
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Некорректные входные данные! Номер телефона не может быть пустым");
+        } catch (NullPointerException npe) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Телефонный номер не найден!");
+        }
 
         Integer code = generateCode();
         addCode(code, phoneNumber);
@@ -43,8 +47,12 @@ public class SMSCodeService {
      * @param phoneNumber - номер телефона пользователя {@link SMSCode}
      */
     public void verifyCode(Integer code, String phoneNumber) {
-        if (code == null || phoneNumber == null)
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Некорректные входные данные!");
+        try {
+            if (code == null || code == 0 || phoneNumber.isEmpty())
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Некорректные входные данные!");
+        } catch (NullPointerException npe) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Телефонный номер не найден!");
+        }
 
         SMSCode codeEntity = getCode(code, phoneNumber);
         deleteCode(codeEntity);
