@@ -1,7 +1,9 @@
 package com.nekromant.confirmation.service;
 
+import com.nekromant.confirmation.client.NotificationZooClient;
 import com.nekromant.confirmation.dao.SMSCodeDAO;
 import com.nekromant.confirmation.model.SMSCode;
+import dto.NotificationDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +20,9 @@ public class SMSCodeService {
 
     @Autowired
     private SMSCodeDAO smsCodeDAO;
+
+    @Autowired
+    private NotificationZooClient notificationZooClient;
 
     @Value("${app.const.smsCodeExpiredDelayInSeconds}")
     private String codeExpiredDelay;
@@ -37,7 +42,7 @@ public class SMSCodeService {
 
         Integer code = generateCode();
         addCode(code, phoneNumber);
-        //sendSms(code, phoneNumber);
+        notificationZooClient.sendSms(new NotificationDTO(phoneNumber, null, "PIN: " + code));
     }
 
     /**

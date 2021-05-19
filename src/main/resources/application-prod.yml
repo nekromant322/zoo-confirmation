@@ -8,6 +8,8 @@ app:
     tokensRemoveSchedulerDelay: 10800
     smsCodeExpiredDelayInSeconds: 10
     smsCodeRemoveSchedulerDelay: 1000000
+  url:
+    notificationZoo: http://localhost:6061
 
 spring:
   h2:
