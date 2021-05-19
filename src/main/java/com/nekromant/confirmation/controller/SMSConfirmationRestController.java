@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/smsCode")
-public class ConfirmationRestController {
+public class SMSConfirmationRestController {
 
     @Autowired
     private SMSCodeService smsCodeService;
@@ -18,7 +18,7 @@ public class ConfirmationRestController {
     }
 
     @PostMapping("verify")
-    public void verifySMSCode(@RequestBody SMSCodeDTO smsCodeDTO) {
+        public void verifySMSCode(@RequestBody SMSCodeDTO smsCodeDTO) {
         smsCodeService.verifyCode(smsCodeDTO.getCode(), smsCodeDTO.getPhoneNumber());
     }
 }
