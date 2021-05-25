@@ -15,15 +15,11 @@ public class NotificationZooClient {
     @Value("${app.url.notificationZoo}")
     private String url;
 
-    private final String smsCodeUrl = url + "/api/notify";
-    private final String sendEmailCodePath = smsCodeUrl + "/sendEmail";
-    private final String sendSmsCodePath = smsCodeUrl + "/sendSms";
-
     public void sendEmail(NotificationDTO notificationDTO) {
-        restTemplate.postForEntity(sendEmailCodePath, notificationDTO, NotificationDTO.class);
+        restTemplate.postForEntity(url + "/api/notify/sendEmail", notificationDTO, NotificationDTO.class);
     }
 
     public void sendSms(NotificationDTO notificationDTO) {
-        restTemplate.postForEntity(sendSmsCodePath, notificationDTO, NotificationDTO.class);
+        restTemplate.postForEntity(url + "/api/notify/sendSms", notificationDTO, NotificationDTO.class);
     }
 }

@@ -60,7 +60,8 @@ public class SMSCodeService {
         }
 
         SMSCode codeEntity = getCode(code, phoneNumber);
-        deleteCode(codeEntity);
+        if (codeEntity != null)
+            deleteCode(codeEntity);
         log.info("Код {} для номера {} успешно прошел проверку!", code, phoneNumber);
     }
 
